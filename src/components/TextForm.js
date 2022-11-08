@@ -54,24 +54,24 @@ export default function TextForm(props) {
 
                 <h1>{props.heading}</h1>
                 <hr />
-                <textarea className="form-control" aria-label="With textarea" id="myBox" rows="8" value={text}onChange={handleOnChange} style ={{backgroundColor: props.mode=== 'dark'?'grey':'white', color: props.mode==='dark'?'white':'black'}}></textarea>
+                <textarea className="form-control" aria-label="With textarea" id="myBox" rows="8" value={text}onChange={handleOnChange} style ={{backgroundColor: props.mode=== 'dark'?'#13466e':'white', color: props.mode==='dark'?'white':'#042743'}}></textarea>
             </div>
             <div className='mb-3'>
-            <button className='btn btn-primary mx-1' onClick={handleUpClick}>Convert to Uppercase</button>
-            <button className='btn btn-primary mx-1' onClick={handleLowClick}>Convert to Lowercase</button>
-            <button className='btn btn-primary mx-1' onClick={handleHeadClick}>Convert to HeadingCase</button>
-            <button className='btn btn-primary mx-1' onClick={handleSentClick}>Convert to SentenceCase</button>
-            <button className='btn btn-primary mx-1' onClick={handleClearText}>Clear text</button>
+            <button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleUpClick}>Convert to Uppercase</button>
+            <button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleLowClick}>Convert to Lowercase</button>
+            <button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleHeadClick}>Convert to HeadingCase</button>
+            <button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleSentClick}>Convert to SentenceCase</button>
+            <button disabled={text.length === 0} className='btn btn-primary mx-1 my-1' onClick={handleClearText}>Clear text</button>
             </div>
         </div>
         <div className="container my-3" style={{color: props.mode==='dark'?'white':'black'}}>
             <h2>Your text summary</h2>
-            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} words and {text.length} characters</p>
             <p>
-                {0.008 * text.split(" ").length} minutes to read
+                {0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} minutes to read
             </p>
             <h2>Preview</h2>
-            <p>{text.length>0? text : "Enter something in the textbox above to preview"}</p>
+            <p>{text.length>0? text : "Nothing to preview"}</p>
         </div>
         </>
     )
